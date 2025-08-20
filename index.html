@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O_O_O's Pipeline TD Portfolio</title>
+    <style>
+        /* 기본 스타일링 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 960px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        /* 헤더 & 네비게이션 */
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            float: right;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+
+        /* Hero 섹션 */
+        #showcase {
+            min-height: 400px;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #333;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('./assets/background_img.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+        #showcase h1 {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        #showcase p {
+            font-size: 20px;
+        }
+
+        /* 섹션 공통 스타일 */
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        /* 프로젝트 카드 */
+        #projects .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden; /* 이미지가 카드를 벗어나지 않도록 */
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .card p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .tags {
+            margin-top: 15px;
+        }
+        .tag {
+            display: inline-block;
+            background: #0779e4;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Skills 섹션 */
+        #skills ul {
+            list-style: none;
+            padding: 0;
+        }
+        #skills li {
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid #0779e4;
+        }
+
+        /* Contact 섹션 */
+        #contact {
+            text-align: center;
+        }
+        #contact a {
+            color: #0779e4;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* 푸터 */
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="#">Hyunyong Ki</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <h1>Pipeline TD / Technical Director</h1>
+        <p>Introduce </p>
+    </section>
+
+    <main class="container">
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <p>
+                Introduce
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+        
+                <a href="project.html?file=shotgrid-asset-manager" class="card-link">
+                    <div class="card">
+                        <img src="assets/fptr-icon.jpg" alt="ShotGrid 에셋 관리 시스템"> <div class="card-content">
+                            <h3>ShotGrid 기반 스튜디오 에셋 관리 시스템 고도화</h3>
+                            <p>Dcc 툴과 Shotgrid API 연동을 통한 퍼블리시 데이터 유효성 검증 자동화 및 안정성과 속도 개선</p>
+                            <div class="tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">ShotGrid API</span>
+                                <span class="tag">PyQt/PySide</span>
+                                <span class="tag">Maya</span>
+                                <span class="tag">Nuke</span>
+                                <span class="tag">Houdini</span>
+                                <span class="tag">Tractor</span>
+                                <span class="tag">Deadline</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+        
+                <a href="project.html?file=usd-pipeline-rnd" class="card-link">
+                    <div class="card">
+                        <img src="assets/piper-banner.jpg" alt="USD 파이프라인"> <div class="card-content">
+                            <h3>USD 기반 파이프라인 시스템 구축</h3>
+                            <p>USD에 기반한 Animation & VFX Film의 파이프라인 시스템을 구축했습니다.</p>
+                            <div class="tags">
+                                <span class="tag">USD</span>
+                                <span class="tag">Houdini Solaris</span>
+                                <span class="tag">Karma</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <ul>
+                <li><strong>Programming Languages:</strong> Python, VEX</li>
+                <li><strong>DCC Software & APIs:</strong> Maya, Houdini, Nuke, Substance Painter</li>
+                <li><strong>Frameworks & Libraries:</strong> PyQt/PySide, PyOpenGL, NumPy, OpenColorIO</li>
+                <li><strong>Production Management:</strong> ShotGrid (Shotgun), Jira</li>
+                <li><strong>Render Engines:</strong> V-Ray, Arnold, Karma, RedShift</li>
+                <li><strong>Others:</strong> Git, Docker, Linux, USD</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <p>새로운 기회에 대해 이야기하고 싶거나 질문이 있으시면 언제든지 연락주세요.</p>
+            <a href="mailto:youremail@example.com">youremail@example.com</a>
+            <p style="margin-top:20px;">0.
+                <a href="https://github.com/your-github-username" target="_blank" style="margin-right: 15px;">GitHub</a> |
+                <a href="https://linkedin.com/in/your-linkedin-profile" target="_blank" style="margin-left: 15px;">LinkedIn</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

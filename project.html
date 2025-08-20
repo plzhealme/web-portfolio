@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* 기본 스타일은 index.html과 유사하게 설정 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 960px;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px 0;
+            border-bottom: #0779e4 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+        
+        /* 마크다운 콘텐츠가 렌더링될 영역 스타일 */
+        #content {
+            background: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        /* 마크다운 변환 후의 태그들 스타일링 */
+        #content h1, #content h2, #content h3 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        #content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        #content pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        #content code {
+            font-family: "Fira Code", "Consolas", "Monaco", monospace;
+        }
+        #content blockquote {
+            border-left: 5px solid #0779e4;
+            padding-left: 15px;
+            color: #666;
+            margin-left: 0;
+        }
+        #content video {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html">&larr; Back to Portfolio</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="content">
+            <h1>Loading...</h1>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 실행될 로직
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. URL에서 'file' 파라미터 값 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectFile = urlParams.get('file');
+
+            const contentDiv = document.getElementById('content');
+
+            // 2. 파라미터 값이 없으면 에러 메시지 표시
+            if (!projectFile) {
+                contentDiv.innerHTML = '<h1>Error: Project not found.</h1><p>Please select a project from the main page.</p>';
+                return;
+            }
+
+            // 3. 마크다운 파일 경로 설정
+            const mdPath = `projects/${projectFile}.md`;
+
+            // 4. 마크다운 파일 비동기적으로 가져오기
+            fetch(mdPath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`File not found: ${mdPath}`);
+                    }
+                    return response.text();
+                })
+                .then(markdownText => {
+                    // 5. 가져온 마크다운 텍스트를 HTML로 변환하여 #content에 삽입
+                    contentDiv.innerHTML = marked.parse(markdownText);
+                })
+                .catch(error => {
+                    console.error('Error fetching markdown:', error);
+                    contentDiv.innerHTML = `<h1>Error</h1><p>Could not load project details. Please check if the file '${mdPath}' exists.</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
