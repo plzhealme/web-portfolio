@@ -1,53 +1,46 @@
-# 샷건(ShotGrid) 기반 에셋 관리 시스템 고도화
+# ShotGrid 기반 스튜디오 파이프라인 시스템 구축
 
-### TL;DR
-- **문제**: 기존 에셋 퍼블리시 시스템의 잦은 오류와 느린 속도.
-- **해결**: 데이터 유효성 검증 자동화, 비동기 처리 도입으로 안정성 및 속도 개선.
-- **결과**: 데이터 오류율 90% 감소, 아티스트 평균 대기 시간 30% 단축.
+### Summary
+- 보편적 영상 프로덕션 (Animation & VFX Film)에서 진행되는 프로젝트를 효율적으로 매니징합니다.
+- 각 Department에서 나오는 data들의 유효성 검사와 Publish 절차를 자동화하여 부서 간 작업이 유기적으로 진행되도록 돕습니다.
+- web-hook, action-menu-item 등을 이용해 management와 artist의 반복작업을 효율적으로 개선합니다.
 
 ---
 
-## 1. 프로젝트 배경 및 문제 정의
+## 1. Experiences
 
-기존에 사용하던 사내 에셋 관리 툴은 Maya에서 ShotGrid(구 Shotgun)로 데이터를 퍼블리시할 때 여러 문제점을 안고 있었습니다.
+기본으로 배포되는 Shotgrid에서 각 스튜디오에서 요구사항에 맞춰 커스텀된 솔루션을 제공합니다.
 
-- **잦은 데이터 누락**: 네이밍 규칙, 필수 메타데이터 등을 수동으로 확인해야 해서 휴먼 에러 발생률이 높았습니다.
-- **느린 처리 속도**: 대용량 파일을 퍼블리시할 때 Maya UI가 그대로 멈춰버려(Blocking) 아티스트의 작업 흐름을 방해했습니다.
-- **복잡한 사용법**: 직관적이지 않은 UI로 인해 신규 입사자 교육에 많은 시간이 소요되었습니다.
+- **파이프라인 아키텍처 설계**: 프로젝트 초기 단계에서부터 최종 결과물까지의 데이터 모델을 정의하고, ShotGrid 스키마를 최적화하여 워크플로우의 기반을 다졌습니다. 각 부서의 요구사항을 반영하여 커스텀 엔티티(Entity)와 필드(Field)를 설계하고, 전체 프로덕션의 데이터 표준화를 주도했습니다.
 
-> 이러한 문제들은 아티스트의 소중한 작업 시간을 낭비시키고, 파이프라인 전체의 데이터 무결성을 해치는 주요 원인이었습니다.
+- **프로세스 자동화의 핵심, 이벤트 시스템 활용**: Action Menu Item과 Webhook을 유기적으로 결합하여 프로덕션의 병목 현상을 제거하는 자동화 시스템을 구축했습니다. 
+    - **ex 1.** 특정 task의 status가 변경 될 때 연결 된 task의 artist들에게 자동 이메일
+    - **ex 2.** web에서 선택 된 아이템들을 외주사에 전달하기 위해 정해진 포맷으로 데이터 패키징    
 
-## 2. 나의 해결책 및 구현 과정
+- **ShotGrid Toolkit(Sgtk) 커스터마이징**: Maya, Nuke, Houdini 등 각 DCC 환경에 최적화된 툴 개발을 위해 Toolkit의 핵심 설정과 앱을 깊이 있게 커스터마이징했습니다. 아티스트가 파이프라인의 존재를 잊고 작업에만 몰입할 수 있는 직관적인 UI/UX의 런처, 퍼블리셔, 로더를 개발하여 데이터 정합성을 확보하고 작업 효율을 극대화했습니다.
 
-이 문제를 해결하기 위해 크게 세 가지 목표를 설정하고 툴을 재설계 및 개발했습니다.
+## 2. Tools
 
-### 2-1. Pre-Publish Validator (사전 유효성 검사기)
+구현 했던 툴들의 간단한 예시입니다.
+프로젝트의 보안상 민감한 이미지는 가렸습니다.
 
-퍼블리시 실행 전, 현재 씬의 모든 데이터를 자동으로 검사하는 Validator를 구현했습니다.
+### 2-1. Version Packaging Manager
 
-- 네이밍 규칙, 경로, 텍스처 해상도, 폴리곤 수 등 프로젝트 규칙에 맞는 커스텀 검사 항목 추가
-- 문제가 발견되면 어떤 에셋에 어떤 문제가 있는지 명확한 리포트 제공
+수퍼바이저 혹은 디렉터가 컨펌한 버전을 패키징해서 벤더사에 정해진 데이터셋으로 보내야 하는 프로세스가 있었습니다.
 
-![툴 스크린샷 - Validator UI](../assets/validator_ui.png)
-*▲ Validator가 에러를 감지하고 사용자에게 리포트하는 UI 화면*
+- web-browser에서 선택한 아이템들을 기준으로 데이터를 패키징합니다.
+- 편집실에서 사용하는 툴에 맞춰 mov를 mxf, subtitle version 등 다양한 포맷과 여러 convert 공정을 거친 파일을 생성해 정해진 디렉토리에 저장합니다.
 
-### 2-2. 비동기(Asynchronous) 퍼블리시 도입
+![툴 스크린샷 - 예시](assets/explain-ami-exam-a.png)
+*▲ 툴의 프로세스를 간략하게 이미지로 설명했습니다.*
 
-`threading` 모듈을 사용하여 무거운 퍼블리시 작업을 별도의 스레드에서 처리하도록 구현했습니다.
+### 2-2. Custom Notification & Emailing Automation
 
-```python
-# 예시 코드
-import threading
-from PySide2 import QtCore
+Shotgrid에서 기본적으로 제공하는 notification은 조건이나 이메일의 포맷을 커스텀하기가 어려워서 web-hook과 Fast-api등을 활용해 notification을 자동화하였습니다.
 
-class Publisher(QtCore.QObject):
-    finished = QtCore.Signal()
+![툴 스크린샷 - 예시](assets/shotgrid-notification.png)
+*▲ 툴의 프로세스를 간략하게 이미지로 설명했습니다.*
 
-    def publish_logic(self, data):
-        # ... (시간이 오래 걸리는 실제 퍼블리시 코드) ...
-        print("Publishing finished!")
-        self.finished.emit()
-
-    def run_in_thread(self, data):
-        thread = threading.Thread(target=self.publish_logic, args=(data,))
-        thread.start()
+- Web-hook에서 감지하는 이벤트의 조건은 상세하게 설정 가능합니다.    
+- Data Query & Processing도 다양한 처리가 가능합니다.
+- Notification의 형태도 email, slack, google chat등 다양한 형태로 가능합니다.

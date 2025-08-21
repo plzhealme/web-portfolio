@@ -16,8 +16,8 @@
             color: #333;
         }
         .container {
-            width: 80%;
-            max-width: 960px;
+            width: 90%;
+            max-width: 1140px;
             margin: auto;
             overflow: hidden;
             padding: 20px;
@@ -59,7 +59,12 @@
             color: #f8f8f2;
             padding: 15px;
             border-radius: 5px;
-            overflow-x: auto;
+            overflow-x: auto; /* 가로 스크롤은 유지 */
+
+            /* ▼▼▼ 크기 조절을 위해 추가할 코드 ▼▼▼ */
+            font-size: 0.85em;   /* 폰트 크기를 약간 작게 (값 조절 가능) */
+            max-height: 400px; /* 블록의 최대 높이를 400px로 제한 (값 조절 가능) */
+            overflow-y: auto;  /* 내용이 높이를 넘어가면 세로 스크롤바 생성 */
         }
         #content code {
             font-family: "Fira Code", "Consolas", "Monaco", monospace;
