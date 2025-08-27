@@ -12,13 +12,12 @@
 - **Level**
     - 기본적으로 3단계의 레벨로 구성되어 있으며 아래와 같습니다.
     > ![usd-concept](assets/usd-concept-a.png)
-    
-    ### Show
-    - 이 쇼의 가장 general한 세팅이 이 레벨에 기록됩니다.        
-    ### Sequence
-    - 해당 시퀀스에 사용되는 배경, 어셋등이 이 레벨에 기록됩니다.
-    ### Shot
-    - 각 샷에서 작업된 캐시들이 이 레벨에 기록됩니다.
+
+- Show -> Sequence -> Shot 순으로 data flow가 진행됩니다.
+- 왼쪽에 있을수록 상위 개념이고 하위개념은 상위 개념의 속성을 상속 받습니다.    
+    - Show: 이 쇼의 가장 general한 세팅이 이 레벨에 기록됩니다. (resolution, fps, environ variable, etc..)       
+    - Sequence: 해당 시퀀스에 사용되는 배경, 어셋등이 이 레벨에 기록됩니다.
+    - Shot: 각 샷에서 작업된 캐시들이 이 레벨에 기록됩니다.
 
     
 
@@ -89,9 +88,9 @@
 
 ---
 
-## 3. Results & Conclusion
-- **Achievements:** [파이프라인 도입 후 얻은 정량적/정성적 성과. 예: 렌더 시간 단축, 아티스트 만족도 증가 등]
-- **Challenges & Lessons Learned:** [프로젝트를 진행하며 겪었던 어려움과 배운 점]
-- **Future Work:** [앞으로 이 파이프라인을 어떻게 더 발전시킬 수 있을지에 대한 생각]
-
+## 3. Additional & Custom Features
+- **USD와 ShotGrid를 활용한 워크플로우 효율화:** 
+    - concept에서 설명한 개념들과 Shotgrid의 기능들을 통합해 프로젝트를 효율적으로 관리하고 진행할 수 있습니다.
+- **USD를 통한 DCC 애플리케이션 상호 운용성 개선:** 
+    - 스튜디오에서 사용되는 각 DCC에서의 아웃풋 데이터를 효율적으로 스튜디오의 USD Composition을 관리합니다.
 ---
